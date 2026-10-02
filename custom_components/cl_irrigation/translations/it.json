@@ -1,0 +1,59 @@
+{
+  "title": "CL Irrigation",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configura CL Irrigation",
+        "description": "Seleziona le entità principali e il numero di zone.",
+        "data": {
+          "name": "Nome impianto",
+          "pump_entity": "Pompa irrigazione (opzionale)",
+          "weather_entity": "Entità meteo (opzionale)",
+          "global_humidity_entity": "Sensore umidità terreno generale (opzionale)",
+          "zone_count": "Numero zone"
+        }
+      },
+      "zone": {
+        "title": "Configura zona {zone} di {total}",
+        "description": "Il sensore umidità della zona è opzionale. Se non impostato verrà usato il sensore generale.",
+        "data": {
+          "name": "Nome zona",
+          "valve_entity": "Valvola",
+          "humidity_entity": "Sensore umidità zona (opzionale)",
+          "duration": "Durata base"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Impostazioni CL Irrigation",
+        "description": "Configura soglie, fattori, ritardi pompa e fino a quattro programmi automatici.",
+        "data": {
+          "rain_threshold_mm": "Soglia pioggia prevista",
+          "humidity_block": "Soglia blocco umidità",
+          "humidity_dry": "Soglia terreno secco",
+          "humidity_very_dry": "Soglia terreno molto secco",
+          "factor_normal": "Fattore normale",
+          "factor_dry": "Fattore terreno secco",
+          "factor_very_dry": "Fattore terreno molto secco",
+          "pump_on_delay": "Ritardo accensione pompa",
+          "pump_off_delay": "Ritardo spegnimento pompa",
+          "manual_respects_conditions": "Avvio manuale rispetta meteo e umidità",
+          "schedule_1_enabled": "Programma 1 attivo",
+          "schedule_1_time": "Orario programma 1",
+          "schedule_2_enabled": "Programma 2 attivo",
+          "schedule_2_time": "Orario programma 2",
+          "schedule_3_enabled": "Programma 3 attivo",
+          "schedule_3_time": "Orario programma 3",
+          "schedule_4_enabled": "Programma 4 attivo",
+          "schedule_4_time": "Orario programma 4"
+        }
+      }
+    },
+    "error": {
+      "invalid_threshold_order": "Le soglie devono rispettare: blocco > secco > molto secco."
+    }
+  }
+}
