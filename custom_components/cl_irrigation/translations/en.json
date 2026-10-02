@@ -1,0 +1,59 @@
+{
+  "title": "CL Irrigation",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure CL Irrigation",
+        "description": "Select the main entities and number of zones.",
+        "data": {
+          "name": "System name",
+          "pump_entity": "Irrigation pump (optional)",
+          "weather_entity": "Weather entity (optional)",
+          "global_humidity_entity": "Global soil moisture sensor (optional)",
+          "zone_count": "Number of zones"
+        }
+      },
+      "zone": {
+        "title": "Configure zone {zone} of {total}",
+        "description": "The zone moisture sensor is optional. If omitted, the global sensor will be used.",
+        "data": {
+          "name": "Zone name",
+          "valve_entity": "Valve",
+          "humidity_entity": "Zone moisture sensor (optional)",
+          "duration": "Base duration"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "CL Irrigation settings",
+        "description": "Configure thresholds, factors, pump delays and up to four automatic schedules.",
+        "data": {
+          "rain_threshold_mm": "Forecast rain threshold",
+          "humidity_block": "Moisture block threshold",
+          "humidity_dry": "Dry soil threshold",
+          "humidity_very_dry": "Very dry soil threshold",
+          "factor_normal": "Normal factor",
+          "factor_dry": "Dry soil factor",
+          "factor_very_dry": "Very dry soil factor",
+          "pump_on_delay": "Pump start delay",
+          "pump_off_delay": "Pump stop delay",
+          "manual_respects_conditions": "Manual start respects weather and moisture",
+          "schedule_1_enabled": "Schedule 1 enabled",
+          "schedule_1_time": "Schedule 1 time",
+          "schedule_2_enabled": "Schedule 2 enabled",
+          "schedule_2_time": "Schedule 2 time",
+          "schedule_3_enabled": "Schedule 3 enabled",
+          "schedule_3_time": "Schedule 3 time",
+          "schedule_4_enabled": "Schedule 4 enabled",
+          "schedule_4_time": "Schedule 4 time"
+        }
+      }
+    },
+    "error": {
+      "invalid_threshold_order": "Thresholds must be ordered: block > dry > very dry."
+    }
+  }
+}
