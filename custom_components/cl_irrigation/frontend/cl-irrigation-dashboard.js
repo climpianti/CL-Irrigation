@@ -1,6 +1,42 @@
 const DOMAIN = "cl_irrigation";
 const STRATEGY = "cl-irrigation";
 
+
+function clControlHomePath(hass) {
+  const panels = hass?.panels || {};
+  for (const [path, panel] of Object.entries(panels)) {
+    if (panel?.component_name !== "lovelace") continue;
+    const title = String(panel?.title || "").trim().toLowerCase();
+    if (path === "cl-control" || title === "cl control") {
+      return `/${String(path).replace(/^\/+|\/+$/g, "")}/home`;
+    }
+  }
+  return "";
+}
+
+function brandSection(hass) {
+  const homePath = clControlHomePath(hass);
+  const card = {
+    type: "markdown",
+    content:
+      '<table role="presentation" width="100%"><tr>' +
+      '<td width="70" valign="middle"><img src="/cl_irrigation/brand/logo.png" width="54"></td>' +
+      '<td valign="middle"><span style="font-size:20px"><b>CL Irrigation</b></span><br>' +
+      '<span style="font-size:13px">Irrigazione intelligente</span></td>' +
+      "</tr></table>",
+    grid_options: { columns: "full", rows: 2 },
+  };
+  if (homePath) {
+    card.tap_action = { action: "navigate", navigation_path: homePath };
+    card.hold_action = { action: "none" };
+  }
+  return {
+    type: "grid",
+    column_span: 4,
+    cards: [card],
+  };
+}
+
 function entityName(hass, entityId, fallback) {
   const state = entityId ? hass.states[entityId] : undefined;
   return state?.attributes?.friendly_name || fallback;
@@ -192,6 +228,7 @@ function centralView(hass, controller, suffix) {
     icon: "mdi:sprinkler-variant",
     max_columns: 4,
     sections: [
+      brandSection(hass),
       overviewSection,
       manualSection,
       ...scheduleSections,
@@ -216,6 +253,7 @@ function statusView(hass, controller, suffix) {
   ]);
 
   const sections = [
+    brandSection(hass),
     {
       type: "grid",
       cards: [
@@ -325,6 +363,7 @@ function settingsView(hass, controller, suffix) {
     icon: "mdi:cog-outline",
     max_columns: 4,
     sections: [
+      brandSection(hass),
       {
         type: "grid",
         cards: [

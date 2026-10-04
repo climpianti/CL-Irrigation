@@ -76,11 +76,22 @@ async def _async_register_dashboard_resource(hass: HomeAssistant) -> None:
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     """Set up CL Irrigation and register its dashboard frontend module."""
-    frontend_file = Path(__file__).parent / "frontend" / FRONTEND_FILENAME
+    component_dir = Path(__file__).parent
+    frontend_file = component_dir / "frontend" / FRONTEND_FILENAME
+    brand_logo = component_dir / "brand" / "logo.png"
     if frontend_file.exists():
-        await hass.http.async_register_static_paths(
-            [StaticPathConfig(FRONTEND_URL, str(frontend_file), cache_headers=False)]
-        )
+        static_paths = [
+            StaticPathConfig(FRONTEND_URL, str(frontend_file), cache_headers=False)
+        ]
+        if brand_logo.exists():
+            static_paths.append(
+                StaticPathConfig(
+                    "/cl_irrigation/brand/logo.png",
+                    str(brand_logo),
+                    cache_headers=True,
+                )
+            )
+        await hass.http.async_register_static_paths(static_paths)
         await _async_register_dashboard_resource(hass)
     else:
         _LOGGER.error("CL Irrigation dashboard frontend file is missing: %s", frontend_file)
