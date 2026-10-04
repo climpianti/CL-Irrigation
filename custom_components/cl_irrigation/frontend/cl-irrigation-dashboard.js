@@ -410,6 +410,7 @@ function historyView(hass, controller, suffix) {
   ]);
 
   const sections = [
+    brandSection(hass),
     {
       type: "grid",
       cards: compact([
@@ -482,7 +483,11 @@ class CLIrrigationDashboardStrategy extends HTMLElement {
               {
                 type: "markdown",
                 content:
-                  "# CL Irrigation\n\nConfigura prima l'integrazione **CL Irrigation** in Impostazioni → Dispositivi e servizi.",
+                  '<table role="presentation" width="100%"><tr>' +
+                  '<td width="70" valign="middle"><img src="/cl_irrigation/brand/logo.png" width="54"></td>' +
+                  '<td valign="middle"><span style="font-size:20px"><b>CL Irrigation</b></span><br>' +
+                  '<span style="font-size:13px">Configura prima l\'integrazione in Impostazioni → Dispositivi e servizi</span></td>' +
+                  "</tr></table>",
               },
             ],
           },
